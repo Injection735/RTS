@@ -7,5 +7,7 @@ namespace Abstractions
 		Sprite Icon { get; }
 		float Health { get; }
 		float MaxHp { get; }
+
+		void Select(bool isSelected);
 	}
 }

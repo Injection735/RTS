@@ -20,6 +20,7 @@ public class SelectedItemPresenter : MonoBehaviour
 		if (_item.Value == null)
 			return;
 
+		_item.Value.Select(_item.Value != null);
 		_view.Icon = _item.Value.Icon;
 		_view.Text = $"{_item.Value.Health}/{_item.Value.MaxHp}";
 		_view.HealthInPercent = _item.Value.Health / _item.Value.MaxHp;

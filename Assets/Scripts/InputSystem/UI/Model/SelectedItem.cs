@@ -13,6 +13,7 @@ public class SelectedItem : ScriptableObject
 
 	public void SetValue(ISelectableItem item)
 	{
+		_currentValue?.Select(false);
 		_currentValue = item;
 		OnSelected.Invoke();
 	}
