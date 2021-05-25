@@ -10,6 +10,8 @@ public class ButtonsPanelView : MonoBehaviour
 	[SerializeField] private Button _moveButton;
 	[SerializeField] private Button _attackButton;
 	[SerializeField] private Button _produceUnitButton;
+	[SerializeField] private Button _patrolButton;
+	[SerializeField] private Button _stopButton;
 
 	private Dictionary<Type, Button> _buttons;
 
@@ -21,7 +23,9 @@ public class ButtonsPanelView : MonoBehaviour
 		{
 			{ typeof(CommandExecutorBase<IProductionCommand>), _produceUnitButton },
 			{ typeof(CommandExecutorBase<IAttackCommand>), _attackButton },
-			{ typeof(CommandExecutorBase<IMoveCommand>), _moveButton }
+			{ typeof(CommandExecutorBase<IMoveCommand>), _moveButton },
+			{ typeof(CommandExecutorBase<IPatrolCommand>), _patrolButton },
+			{ typeof(CommandExecutorBase<IStopCommand>), _stopButton }
 		};
 	}
 

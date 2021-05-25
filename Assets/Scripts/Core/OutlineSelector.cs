@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class OutlineSelector : MonoBehaviour
 {
-	[SerializeField] private MeshRenderer[] _renderers;
+	[SerializeField] private Renderer[] _renderers;
 	[SerializeField] private Material _outlineMaterial;
 
 	private bool _isSelected;
@@ -15,7 +15,7 @@ public class OutlineSelector : MonoBehaviour
 		if (isSelected == _isSelected)
 			return;
 
-		foreach(MeshRenderer renderer in _renderers)
+		foreach(Renderer renderer in _renderers)
 		{
 			var materialsList = renderer.materials.ToList();
 			if (isSelected)

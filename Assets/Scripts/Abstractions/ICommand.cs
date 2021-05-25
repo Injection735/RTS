@@ -19,3 +19,11 @@ public interface IMoveCommand : ICommand
 public interface IAttackCommand : ICommand
 {
 }
+
+public interface IStopCommand : ICommand
+{
+}
+
+public interface IPatrolCommand : ICommand
+{
+}

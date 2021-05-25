@@ -35,12 +35,9 @@ public class ButtonsPanelPresenter : MonoBehaviour
 
 	private void HandleClick(ICommandExecutor executor)
 	{
-
 		if (executor as CommandExecutorBase<IProductionCommand>)
-		{
-			executor.Execute(_storage.Inject(new ProduceCommand()));
-		}
+			executor.Execute(_storage.Inject(new ProduceCommandHeir()));
 		else
-			Debug.Log("Not handled " + executor.GetType());
+			Debug.Log("Not handled " +  executor.GetType());
 	}
 }
