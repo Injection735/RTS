@@ -5,7 +5,7 @@ using Abstractions;
 
 namespace Core
 {
-	public class MainBuilding : MonoBehaviour, ISelectableItem
+	public class MainBuilding : CommandExecutorBase<IProductionCommand>, ISelectableItem
 	{
 		[SerializeField] private OutlineSelector _selector;
 		[SerializeField] private Sprite _icon;
@@ -19,6 +19,17 @@ namespace Core
 		public void Select(bool isSelected)
 		{
 			_selector.SetSelected(isSelected);
+		}
+
+		protected override void ExecuteConcreteCommand(IProductionCommand command)
+		{
+			if (command.UnitPrefab == null)
+			{
+				Debug.LogError("No prefab in MainBuildin excecute");
+				return;
+			}
+
+			Instantiate(command.UnitPrefab, transform.position, Quaternion.identity, transform.parent);
 		}
 	}
 }
