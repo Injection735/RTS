@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Core
 {
@@ -18,7 +19,12 @@ namespace Core
 
 	public class MoveCommand : IMoveCommand
 	{
-		public Vector3 Position => new Vector3();
+		public Vector3 Position { get; }
+
+		public MoveCommand(Vector3 position)
+		{
+			Position = position;
+		}
 	}
 
 	public class StopCommand : IStopCommand

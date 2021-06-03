@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Core;
+using Zenject;
 
 public class ButtonsPanelPresenter : MonoBehaviour
 {
 	[SerializeField] private SelectedItem _item;
 	[SerializeField] private ButtonsPanelView _view;
+
+	[Inject] private ButtonPanel _buttonPanel;
 
 	[SerializeField] private AssetStorage _storage;
 
@@ -35,9 +38,6 @@ public class ButtonsPanelPresenter : MonoBehaviour
 
 	private void HandleClick(ICommandExecutor executor)
 	{
-		if (executor as CommandExecutorBase<IProductionCommand>)
-			executor.Execute(_storage.Inject(new ProduceCommandHeir()));
-		else
-			Debug.Log("Not handled " +  executor.GetType());
+		_buttonPanel.HandleClick(executor);
 	}
 }
