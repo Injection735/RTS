@@ -35,7 +35,7 @@ public class MoveCommandCreator : CommandCreatorBase<IMoveCommand>
 	private void Init(Vector3Value currentGroundPosition)
 	{
 		_currentGroundPosition = currentGroundPosition;
-		currentGroundPosition.OnChanged += HandleCurrentGroundPositionChanged;
+		_currentGroundPosition.OnChanged += HandleCurrentGroundPositionChanged;
 	}
 
 	private void HandleCurrentGroundPositionChanged()
@@ -44,6 +44,59 @@ public class MoveCommandCreator : CommandCreatorBase<IMoveCommand>
 	}
 
 	protected override void CreateSpecificCommand(Action<IMoveCommand> onCreate)
+	{
+		_onCreate = onCreate;
+	}
+}
+
+public class AttackCommandCreator : CommandCreatorBase<IAttackCommand>
+{
+	[Inject] private AssetStorage _context;
+
+	private Action<IAttackCommand> _onCreate;
+
+	private GameObjectValue _enemy;
+
+	[Inject]
+	private void Init(GameObjectValue enemy)
+	{
+		_enemy = enemy;
+		_enemy.OnChanged += HandleAttack;
+	}
+
+	private void HandleAttack()
+	{
+		_onCreate?.Invoke(_context.Inject(new AttackCommand(_enemy.Value)));
+	}
+
+	protected override void CreateSpecificCommand(Action<IAttackCommand> onCreate)
+	{
+		_onCreate = onCreate;
+	}
+}
+
+
+public class PatrolCommandCreator : CommandCreatorBase<IPatrolCommand>
+{
+	[Inject] private AssetStorage _context;
+
+	private Action<IPatrolCommand> _onCreate;
+
+	private Vector3Collection _patrolPoints;
+
+	[Inject]
+	private void Init(Vector3Collection patrolPoints)
+	{
+		_patrolPoints = patrolPoints;
+		_patrolPoints.OnChanged += HandleCurrentGroundPositionChanged;
+	}
+
+	private void HandleCurrentGroundPositionChanged()
+	{
+		_onCreate?.Invoke(_context.Inject(new PatrolCommand(_patrolPoints.Value)));
+	}
+
+	protected override void CreateSpecificCommand(Action<IPatrolCommand> onCreate)
 	{
 		_onCreate = onCreate;
 	}

@@ -9,7 +9,7 @@ public class SelectedItemPresenter : MonoBehaviour
 
 	protected void Start()
 	{
-		_item.OnSelected += UpdateView;
+		_item.OnChanged += UpdateView;
 		UpdateView();
 	}
 

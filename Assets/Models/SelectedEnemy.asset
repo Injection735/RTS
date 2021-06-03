@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91f435bb5623c9d48979698f41692028, type: 3}
-  m_Name: CurrentSelectedItem
+  m_Script: {fileID: 11500000, guid: a38428533eeec594aad863bc855d7fd8, type: 3}
+  m_Name: SelectedEnemy
   m_EditorClassIdentifier: 

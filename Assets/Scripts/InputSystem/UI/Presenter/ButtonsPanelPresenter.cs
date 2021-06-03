@@ -19,7 +19,7 @@ public class ButtonsPanelPresenter : MonoBehaviour
 
 	protected void Start()
 	{
-		_item.OnSelected += SetButton;
+		_item.OnChanged += SetButton;
 		SetButton();
 		_view.OnClick += HandleClick;
 	}

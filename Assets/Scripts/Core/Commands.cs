@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 namespace Core
@@ -15,6 +16,12 @@ namespace Core
 
 	public class AttackCommand : IAttackCommand
 	{
+		public GameObject AttackedObject { get; }
+
+		public AttackCommand(GameObject attackedObject)
+		{
+			AttackedObject = attackedObject;
+		}
 	}
 
 	public class MoveCommand : IMoveCommand
@@ -27,11 +34,17 @@ namespace Core
 		}
 	}
 
-	public class StopCommand : IStopCommand
+	public class PatrolCommand : IPatrolCommand
 	{
+		public List<Vector3> PatrolPoints { get; }
+
+		public PatrolCommand(List<Vector3> patrolPositions)
+		{
+			PatrolPoints = patrolPositions;
+		}
 	}
 
-	public class PatrolCommand : IPatrolCommand
+	public class StopCommand : IStopCommand
 	{
 	}
 }

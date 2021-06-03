@@ -18,6 +18,7 @@ public interface IMoveCommand : ICommand
 
 public interface IAttackCommand : ICommand
 {
+	GameObject AttackedObject { get; }
 }
 
 public interface IStopCommand : ICommand
@@ -26,4 +27,5 @@ public interface IStopCommand : ICommand
 
 public interface IPatrolCommand : ICommand
 {
+	List<Vector3> PatrolPoints { get; }
 }
