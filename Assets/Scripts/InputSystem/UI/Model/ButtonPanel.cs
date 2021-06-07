@@ -19,6 +19,20 @@ public class ButtonPanel
 		_patrolCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
 	}
 
+	public void HandleSelecctionChanged()
+	{
+		CancelPendingCommand();
+	}
+
+	private void CancelPendingCommand()
+	{
+		if (!_isPending)
+			return;
+
+		_produceCommandCreator.CancelCommand();
+		_moveCommandCreator.CancelCommand();
+	}
+
 	private void ExecuteSpecificCommand(ICommandExecutor executor, ICommand command)
 	{
 		executor.Execute(command);

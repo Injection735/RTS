@@ -19,9 +19,15 @@ public class ButtonsPanelPresenter : MonoBehaviour
 
 	protected void Start()
 	{
-		_item.OnChanged += SetButton;
+		_item.OnChanged += HandleSelectionChanged;
 		SetButton();
 		_view.OnClick += HandleClick;
+	}
+
+	private void HandleSelectionChanged()
+	{
+		_buttonPanel.HandleSelecctionChanged();
+		SetButton();
 	}
 
 	private void SetButton()

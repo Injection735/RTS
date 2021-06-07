@@ -18,9 +18,10 @@ public class ModelInstaller : MonoInstaller
 		Container.Bind<CommandCreatorBase<IAttackCommand>>().To<AttackCommandCreator>().AsTransient();
 		Container.Bind<CommandCreatorBase<IPatrolCommand>>().To<PatrolCommandCreator>().AsTransient();
 
+		Container.Bind<IAwaitable<Vector3>>().FromInstance(_currentGroundPosition);
+
 		Container.Bind<ButtonPanel>().AsTransient();
 
-		Container.Bind<Vector3Value>().FromInstance(_currentGroundPosition).AsSingle();
 		Container.Bind<Vector3Collection>().FromInstance(_patrolPoints).AsSingle();
 		Container.Bind<GameObjectValue>().FromInstance(_selectedEnemy).AsSingle();
 	}

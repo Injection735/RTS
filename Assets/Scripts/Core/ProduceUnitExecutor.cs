@@ -10,7 +10,6 @@ public class ProduceUnitExecutor : CommandExecutorBase<IProductionCommand>
 			return;
 		}
 
-		Instantiate(command.UnitPrefab, transform.position, Quaternion.identity, transform.parent);
-
+		Instantiate(command.UnitPrefab, transform.position + Vector3.forward * 3, Quaternion.identity, transform.parent);
 	}
 }

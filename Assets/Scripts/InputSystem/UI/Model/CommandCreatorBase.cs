@@ -1,6 +1,9 @@
 ﻿using Zenject;
 using Core;
 using System;
+using System.Threading;
+using System.Diagnostics;
+using UnityEngine;
 
 public abstract class CommandCreatorBase<T> where T : ICommand
 {
@@ -11,6 +14,48 @@ public abstract class CommandCreatorBase<T> where T : ICommand
 	}
 
 	protected abstract void CreateSpecificCommand(Action<T> onCreate);
+
+	public virtual void CancelCommand()
+	{ }
+}
+
+public abstract class CommandCreatorCancelable<T, TParam> : CommandCreatorBase<T> where T : ICommand
+{
+	[Inject] private AssetStorage _context;
+	[Inject] private IAwaitable<TParam> _param;
+	private CancellationTokenSource _tokenSource;
+
+	public void CreateCommand(ICommandExecutor commandExecutor, Action<T> onCreate)
+	{
+		if (commandExecutor as CommandExecutorBase<T>)
+			CreateSpecificCommand(onCreate);
+	}
+
+	protected override async void CreateSpecificCommand(Action<T> onCreate)
+	{
+		_tokenSource = new CancellationTokenSource();
+		try
+		{
+			var nextClick = await _param.AsTask().WithCancelation(_tokenSource.Token);
+			onCreate?.Invoke(_context.Inject(CreateSpecificCommandWithParameter(nextClick)));
+		}
+		catch (OperationCanceledException e)
+		{
+			UnityEngine.Debug.Log("Operation canceled");
+		}
+	}
+
+	protected abstract T CreateSpecificCommandWithParameter(TParam param);
+
+	public override void CancelCommand()
+	{
+		if (_tokenSource == null)
+			return;
+
+		_tokenSource.Cancel();
+		_tokenSource.Dispose();
+		_tokenSource = null;
+	}
 }
 
 public class ProduceUnitCommandCreator : CommandCreatorBase<IProductionCommand>
@@ -23,30 +68,9 @@ public class ProduceUnitCommandCreator : CommandCreatorBase<IProductionCommand>
 	}
 }
 
-public class MoveCommandCreator : CommandCreatorBase<IMoveCommand>
+public class MoveCommandCreator : CommandCreatorCancelable<IMoveCommand, Vector3>
 {
-	[Inject] private AssetStorage _context;
-
-	private Action<IMoveCommand> _onCreate;
-
-	private Vector3Value _currentGroundPosition;
-
-	[Inject]
-	private void Init(Vector3Value currentGroundPosition)
-	{
-		_currentGroundPosition = currentGroundPosition;
-		_currentGroundPosition.OnChanged += HandleCurrentGroundPositionChanged;
-	}
-
-	private void HandleCurrentGroundPositionChanged()
-	{
-		_onCreate?.Invoke(_context.Inject(new MoveCommand(_currentGroundPosition.Value)));
-	}
-
-	protected override void CreateSpecificCommand(Action<IMoveCommand> onCreate)
-	{
-		_onCreate = onCreate;
-	}
+	protected override IMoveCommand CreateSpecificCommandWithParameter(Vector3 param) => new MoveCommand(param);
 }
 
 public class AttackCommandCreator : CommandCreatorBase<IAttackCommand>
