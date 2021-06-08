@@ -34,6 +34,10 @@ namespace Core
 		}
 	}
 
+	public class StopCommand : IStopCommand
+	{
+	}
+
 	public class PatrolCommand : IPatrolCommand
 	{
 		public List<Vector3> PatrolPoints { get; }
@@ -42,9 +46,5 @@ namespace Core
 		{
 			PatrolPoints = patrolPositions;
 		}
-	}
-
-	public class StopCommand : IStopCommand
-	{
 	}
 }

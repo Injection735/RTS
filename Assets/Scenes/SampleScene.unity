@@ -455,6 +455,7 @@ MonoBehaviour:
     type: 2}
   _patrolPoints: {fileID: 11400000, guid: 9fcf51bee1e6adb46bf87b77139fea0f, type: 2}
   _selectedEnemy: {fileID: 11400000, guid: 2663e3bcde6d2ce4f84f5738dc0b00ea, type: 2}
+  _holdValue: {fileID: 11400000, guid: 2215136ea33d72f49ba8ade33312c934, type: 2}
   _eventSystem: {fileID: 2019027861}
 --- !u!1 &445239158
 GameObject:
@@ -2073,6 +2074,7 @@ MonoBehaviour:
   _patrolPoints: {fileID: 11400000, guid: 9fcf51bee1e6adb46bf87b77139fea0f, type: 2}
   _selectedEnemy: {fileID: 11400000, guid: 2663e3bcde6d2ce4f84f5738dc0b00ea, type: 2}
   _context: {fileID: 11400000, guid: 09856faaa92662544b146c10a311cf96, type: 2}
+  _holdValue: {fileID: 11400000, guid: 2215136ea33d72f49ba8ade33312c934, type: 2}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

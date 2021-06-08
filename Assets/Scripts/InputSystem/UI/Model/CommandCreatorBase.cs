@@ -73,6 +73,16 @@ public class MoveCommandCreator : CommandCreatorCancelable<IMoveCommand, Vector3
 	protected override IMoveCommand CreateSpecificCommandWithParameter(Vector3 param) => new MoveCommand(param);
 }
 
+public class StopCommandCreator : CommandCreatorBase<IStopCommand>
+{
+	[Inject] private AssetStorage _context;
+
+	protected override void CreateSpecificCommand(Action<IStopCommand> onCreate)
+	{
+		onCreate.Invoke(_context.Inject(new StopCommand()));
+	}
+}
+
 public class AttackCommandCreator : CommandCreatorBase<IAttackCommand>
 {
 	[Inject] private AssetStorage _context;

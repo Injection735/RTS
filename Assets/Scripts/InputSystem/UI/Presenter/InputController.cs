@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
 	[SerializeField] private Vector3Value _currentGroundPosition;
 	[SerializeField] private Vector3Collection _patrolPoints;
 	[SerializeField] private GameObjectValue _selectedEnemy;
+	[SerializeField] private HoldValue _holdValue;
 
 	[SerializeField] private EventSystem _eventSystem;
 
@@ -18,6 +19,9 @@ public class InputController : MonoBehaviour
 	{
 		if (_eventSystem.IsPointerOverGameObject())
 			return;
+
+		if (Input.GetKey(KeyCode.S))
+			_holdValue.SetValue(!_holdValue.Value);
 
 		// גûהוכוםטו ֻÊּ
 		if (Input.GetMouseButtonDown(0))

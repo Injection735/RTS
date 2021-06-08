@@ -25,7 +25,7 @@ public class ButtonsPanelView : MonoBehaviour
 			{ typeof(CommandExecutorBase<IAttackCommand>), _attackButton },
 			{ typeof(CommandExecutorBase<IMoveCommand>), _moveButton },
 			{ typeof(CommandExecutorBase<IPatrolCommand>), _patrolButton },
-			{ typeof(CommandExecutorBase<IStopCommand>), _stopButton }
+			{ typeof(CommandExecutorBase<IStopCommand>), _stopButton },
 		};
 	}
 
