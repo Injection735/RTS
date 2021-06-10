@@ -109,7 +109,6 @@ public class AttackCommandCreator : CommandCreatorBase<IAttackCommand>
 	}
 }
 
-
 public class PatrolCommandCreator : CommandCreatorBase<IPatrolCommand>
 {
 	[Inject] private AssetStorage _context;
