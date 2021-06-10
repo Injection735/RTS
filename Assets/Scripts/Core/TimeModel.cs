@@ -22,11 +22,13 @@ namespace Core
 		public void Pause()
 		{
 			_isPaused = true;
+			Time.timeScale = 0;
 		}
 
 		public void Unpause()
 		{
 			_isPaused = false;
+			Time.timeScale = 1;
 		}
 	}
 }
