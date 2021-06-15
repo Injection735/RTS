@@ -64,7 +64,7 @@ public class ProduceUnitCommandCreator : CommandCreatorBase<IProductionCommand>
 
 	protected override void CreateSpecificCommand(Action<IProductionCommand> onCreate)
 	{
-		onCreate.Invoke(_context.Inject(new ProduceCommandHeir()));
+		onCreate.Invoke(_context.Inject(new ProduceCommand()));
 	}
 }
 

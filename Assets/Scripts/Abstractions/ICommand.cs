@@ -9,6 +9,8 @@ public interface ICommand
 public interface IProductionCommand : ICommand
 {
 	GameObject UnitPrefab { get; }
+	int ProductionTime { get; }
+	Sprite ProductionIcon { get; }
 }
 
 public interface IMoveCommand : ICommand

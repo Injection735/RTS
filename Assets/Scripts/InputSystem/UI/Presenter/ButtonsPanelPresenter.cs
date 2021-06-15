@@ -20,7 +20,6 @@ public class ButtonsPanelPresenter : MonoBehaviour
 	private ISelectableItem _currentSelected;
 	private Dictionary<CommandExecutorType, IDisposable> disposables = new Dictionary<CommandExecutorType, IDisposable>();
 
-
 	protected void Start()
 	{
 		_item.OnChanged += HandleSelectionChanged;

@@ -8,10 +8,8 @@ namespace Core
 	{
 		[InjectAsset("Ellen")] private GameObject _unitPrefab;
 		public GameObject UnitPrefab => _unitPrefab;
-	}
-
-	public class ProduceCommandHeir : ProduceCommand
-	{
+		[Inject] public int ProductionTime { get; }
+		[Inject] public Sprite ProductionIcon { get; }
 	}
 
 	public class AttackCommand : IAttackCommand

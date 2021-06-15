@@ -26,5 +26,6 @@ public class ModelInstaller : MonoInstaller
 		Container.Bind<GameObjectValue>().FromInstance(_selectedEnemy).AsSingle();
 	
 		Container.Bind<ButtonPanel>().AsTransient();
+		Container.Bind<UnitProductionPanel>().AsTransient();
 	}
 }
