@@ -83,6 +83,11 @@ public class StopCommandCreator : CommandCreatorBase<IStopCommand>
 	}
 }
 
+public class SetCollectionCommandCreator : CommandCreatorCancelable<ISetCollectionPointCommand, Vector3>
+{
+	protected override ISetCollectionPointCommand CreateSpecificCommandWithParameter(Vector3 param) => new SetCollectionPointCommand(param);
+}
+
 public class AttackCommandCreator : CommandCreatorBase<IAttackCommand>
 {
 	[Inject] private AssetStorage _context;

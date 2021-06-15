@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
 
 public interface ICommandExecutor
 {
@@ -7,10 +9,28 @@ public interface ICommandExecutor
 
 public abstract class CommandExecutorBase<TCommand> : MonoBehaviour, ICommandExecutor where TCommand : ICommand
 {
+	private List<System.Func<Task>> queue = new List<System.Func<Task>>();
+
 	public void Execute(ICommand command)
 	{
-		ExecuteConcreteCommand((TCommand) command);
+		queue.Add(async () => await ExecuteConcreteCommand((TCommand) command));
+
+		if (queue.Count == 1)
+			ExecuteNext();
 	}
 
-	protected abstract void ExecuteConcreteCommand(TCommand command);
+	private async void ExecuteNext()
+	{
+		if (queue.Count == 0)
+			return;
+
+		if (queue.Count > 0)
+			await queue[0].Invoke();
+
+		queue.RemoveAt(0);
+
+		ExecuteNext();
+	}
+
+	protected abstract Task ExecuteConcreteCommand(TCommand command);
 }

@@ -32,6 +32,16 @@ namespace Core
 		}
 	}
 
+	public class SetCollectionPointCommand : ISetCollectionPointCommand
+	{
+		public Vector3 Position { get; }
+
+		public SetCollectionPointCommand(Vector3 position)
+		{
+			Position = position;
+		}
+	}
+
 	public class StopCommand : IStopCommand
 	{
 	}

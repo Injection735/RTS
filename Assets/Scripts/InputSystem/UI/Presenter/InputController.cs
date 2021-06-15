@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
 {
 	[SerializeField] private Camera _camera;
 	[SerializeField] private SelectedItem _item;
+	[SerializeField] private Vector3Value _collectionPosition;
 	[SerializeField] private Vector3Value _currentGroundPosition;
 	[SerializeField] private Vector3Collection _patrolPoints;
 	[SerializeField] private GameObjectValue _selectedEnemy;
@@ -63,5 +64,6 @@ public class InputController : MonoBehaviour
 		_patrolPoints.SetValue(_patrolPoints.Value);
 
 		_currentGroundPosition.SetValue(hitInfo.point);
+		_collectionPosition.SetValue(hitInfo.point);
 	}
 }

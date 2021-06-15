@@ -7,6 +7,7 @@ public class ButtonPanel
 	[Inject] private CommandCreatorBase<IAttackCommand> _attackCommandCreator;
 	[Inject] private CommandCreatorBase<IPatrolCommand> _patrolCommandCreator;
 	[Inject] private CommandCreatorBase<IStopCommand> _stopCommandCreator;
+	[Inject] private CommandCreatorBase<ISetCollectionPointCommand> _setCollectionPointCommandCreator;
 
 	private bool _isPending;
 
@@ -19,6 +20,7 @@ public class ButtonPanel
 		_attackCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
 		_patrolCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
 		_stopCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
+		_setCollectionPointCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
 	}
 
 	public void HandleSelecctionChanged()

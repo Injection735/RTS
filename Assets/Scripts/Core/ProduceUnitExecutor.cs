@@ -1,23 +1,27 @@
 ﻿using Core;
 using System;
+using System.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 public class ProduceUnitExecutor : CommandExecutorBase<IProductionCommand>, ITickable, IUnitProducer
 {
+	public System.Action<GameObject> OnUnitCreate = delegate { };
+
 	public IReactiveCollection<IUnitProductionTask> Queue => _queue;
 	private IReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
 
-	protected override void ExecuteConcreteCommand(IProductionCommand command)
+	protected override Task ExecuteConcreteCommand(IProductionCommand command)
 	{
 		if (command.UnitPrefab == null)
 		{
 			Debug.LogError("No prefab in MainBuildin excecute");
-			return;
+			return Task.CompletedTask;
 		}
 
-		_queue.Add(new UnitProductionTask(command.ProductionIcon, command.ProductionTime + 100, command.UnitPrefab));
+		_queue.Add(new UnitProductionTask(command.ProductionIcon, command.ProductionTime, command.UnitPrefab));
+		return Task.CompletedTask;
 	}
 
 	public void Tick()
@@ -30,13 +34,13 @@ public class ProduceUnitExecutor : CommandExecutorBase<IProductionCommand>, ITic
 
 		if (currentTask.ProductionTimeLeft <= 0)
 		{
-			CreateUnit(currentTask);
+			OnUnitCreate.Invoke(CreateUnit(currentTask));
 			_queue.Remove(currentTask);
 		}
 	}
 
-	private void CreateUnit(IUnitProductionTask task)
+	private GameObject CreateUnit(IUnitProductionTask task)
 	{
-		Instantiate(task.UnitPrefab, transform.position + Vector3.forward * 3, Quaternion.identity, transform.parent);
+		return Instantiate(task.UnitPrefab, transform.position + Vector3.forward * 3, Quaternion.identity, transform.parent);
 	}
 }

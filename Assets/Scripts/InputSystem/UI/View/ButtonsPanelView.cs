@@ -11,7 +11,8 @@ public enum CommandExecutorType
 	Attack,
 	Move,
 	Patrol,
-	Stop
+	Stop,
+	SetCollectionPoint
 }
 
 public class ButtonsPanelView : MonoBehaviour
@@ -21,6 +22,7 @@ public class ButtonsPanelView : MonoBehaviour
 	[SerializeField] private Button _produceUnitButton;
 	[SerializeField] private Button _patrolButton;
 	[SerializeField] private Button _stopButton;
+	[SerializeField] private Button _setCollectionPointButton;
 
 	private Dictionary<CommandExecutorType, Button> _buttons;
 
@@ -40,6 +42,8 @@ public class ButtonsPanelView : MonoBehaviour
 				return typeof(CommandExecutorBase<IPatrolCommand>);
 			case CommandExecutorType.Stop:
 				return typeof(CommandExecutorBase<IStopCommand>);
+			case CommandExecutorType.SetCollectionPoint:
+				return typeof(CommandExecutorBase<ISetCollectionPointCommand>);
 		}
 
 		throw new Exception("Can't recognize CommandExecutorType");
@@ -54,6 +58,7 @@ public class ButtonsPanelView : MonoBehaviour
 			{ CommandExecutorType.Move, _moveButton },
 			{ CommandExecutorType.Patrol, _patrolButton },
 			{ CommandExecutorType.Stop, _stopButton },
+			{ CommandExecutorType.SetCollectionPoint, _setCollectionPointButton }
 		};
 	}
 }
