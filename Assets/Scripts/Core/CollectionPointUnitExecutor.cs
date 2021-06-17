@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class CollectionPointUnitExecutor : CommandExecutorBase<ISetCollectionPointCommand>
 {
-	[SerializeField] private ProduceUnitExecutor _produceExecutor;
+	[SerializeField] private ProduceUnitExecutorBase<IProductionCommand> _produceExecutor;
 
 	protected override Task ExecuteConcreteCommand(ISetCollectionPointCommand command)
 	{

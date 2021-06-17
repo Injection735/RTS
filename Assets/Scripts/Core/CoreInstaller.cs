@@ -7,6 +7,8 @@ public class CoreInstaller : MonoInstaller
 	public override void InstallBindings()
 	{
 		Container.BindInterfacesAndSelfTo<TimeModel>().AsSingle();
-		Container.BindInterfacesAndSelfTo<ProduceUnitExecutor>().FromComponentInHierarchy().AsTransient();
+		Container.BindInterfacesAndSelfTo<ProduceUnitExecutorEllen>().FromComponentInHierarchy().AsTransient();
+		Container.BindInterfacesAndSelfTo<ProduceUnitExecutorChomper>().FromComponentInHierarchy().AsTransient();
+		Container.BindInterfacesAndSelfTo<AttackUnitExecutor>().FromComponentInHierarchy().AsTransient();
 	}
 }

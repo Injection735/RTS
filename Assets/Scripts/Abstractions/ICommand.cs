@@ -1,3 +1,4 @@
+using Abstractions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,14 @@ public interface IProductionCommand : ICommand
 	Sprite ProductionIcon { get; }
 }
 
+public interface IProductionCommandEllen : IProductionCommand
+{
+}
+
+public interface IProductionCommandChomper : IProductionCommand
+{
+}
+
 public interface IMoveCommand : ICommand
 {
 	Vector3 Position { get; }
@@ -26,7 +35,7 @@ public interface ISetCollectionPointCommand : ICommand
 
 public interface IAttackCommand : ICommand
 {
-	GameObject AttackedObject { get; }
+	IAttackable Target { get; }
 }
 
 public interface IStopCommand : ICommand

@@ -5,14 +5,14 @@ using UniRx;
 using UnityEngine;
 using Zenject;
 
-public class ProduceUnitExecutor : CommandExecutorBase<IProductionCommand>, ITickable, IUnitProducer
+public abstract class ProduceUnitExecutorBase<T> : CommandExecutorBase<T>, ITickable, IUnitProducer where T : IProductionCommand
 {
 	public System.Action<GameObject> OnUnitCreate = delegate { };
 
 	public IReactiveCollection<IUnitProductionTask> Queue => _queue;
 	private IReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
 
-	protected override Task ExecuteConcreteCommand(IProductionCommand command)
+	protected override Task ExecuteConcreteCommand(T command)
 	{
 		if (command.UnitPrefab == null)
 		{
@@ -30,9 +30,9 @@ public class ProduceUnitExecutor : CommandExecutorBase<IProductionCommand>, ITic
 			return;
 
 		var currentTask = _queue[0];
-		currentTask.ProductionTimeLeft = Math.Max(currentTask.ProductionTimeLeft - Time.deltaTime, 0);
+		currentTask.ProductionTimeLeft.Value = Math.Max(currentTask.ProductionTimeLeft.Value - Time.deltaTime, 0);
 
-		if (currentTask.ProductionTimeLeft <= 0)
+		if (currentTask.ProductionTimeLeft.Value <= 0)
 		{
 			OnUnitCreate.Invoke(CreateUnit(currentTask));
 			_queue.Remove(currentTask);

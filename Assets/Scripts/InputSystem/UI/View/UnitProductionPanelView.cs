@@ -21,7 +21,7 @@ public class UnitProductionPanelView : MonoBehaviour
 			var currentTask = tasks[0];
 			_productionIcon.sprite = currentTask.Icon;
 			_productionTimeLeft.text = TimeSpan.FromSeconds((int) currentTask.ProductionTime).ToString();
-			_productionProgress.value = currentTask.ProductionTimeLeft / currentTask.ProductionTime;
+			_productionProgress.value = currentTask.ProductionTimeLeft.Value / currentTask.ProductionTime;
 			return;
 		}
 
@@ -35,8 +35,10 @@ public class UnitProductionPanelView : MonoBehaviour
 		{
 			var currentTask = newElement.Value;
 			_productionIcon.sprite = currentTask.Icon;
-			_productionTimeLeft.text = TimeSpan.FromSeconds((int) currentTask.ProductionTime).ToString();
-			_productionProgress.value = currentTask.ProductionTimeLeft / currentTask.ProductionTime;
+			currentTask.ProductionTimeLeft.Subscribe((time) =>
+			{
+				UpdateTimeProgress(time, currentTask.ProductionTime);
+			});
 			return;
 		}
 		
@@ -53,5 +55,11 @@ public class UnitProductionPanelView : MonoBehaviour
 		{
 			image.sprite = _emptyIcon;
 		}
+	}
+
+	private void UpdateTimeProgress(float timeLeft, float productionTime)
+	{
+		_productionTimeLeft.text = TimeSpan.FromSeconds((int) timeLeft).ToString();
+		_productionProgress.value = timeLeft / productionTime;
 	}
 }

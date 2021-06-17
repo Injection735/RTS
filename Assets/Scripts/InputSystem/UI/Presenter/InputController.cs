@@ -13,7 +13,7 @@ public class InputController : MonoBehaviour
 	[SerializeField] private Vector3Value _collectionPosition;
 	[SerializeField] private Vector3Value _currentGroundPosition;
 	[SerializeField] private Vector3Collection _patrolPoints;
-	[SerializeField] private GameObjectValue _selectedEnemy;
+	[SerializeField] private AttackableValue _enemy;
 	[SerializeField] private HoldValue _holdValue;
 
 	[SerializeField] private EventSystem _eventSystem;
@@ -33,6 +33,11 @@ public class InputController : MonoBehaviour
 	{
 		if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out var hitInfo))
 		{
+			var fractionComponent = hitInfo.collider.GetComponent<IFractionMember>();
+
+			if (fractionComponent != null && fractionComponent.Id != 0) // не наш юнит
+				return;
+
 			var selectableItem  = hitInfo.collider.GetComponent<ISelectableItem>();
 			_item.SetValue(selectableItem);
 		}
@@ -54,10 +59,18 @@ public class InputController : MonoBehaviour
 			return;
 		}
 
-		if (hitInfo.transform.gameObject.tag == "Enemy") // TODO const
+		var selectableItem  = hitInfo.collider.GetComponent<ISelectableItem>();
+		
+		if (selectableItem != null)
 		{
-			_selectedEnemy.SetValue(hitInfo.transform.gameObject);
-			return;
+			var fractionComponent = (selectableItem as Component).GetComponent<IFractionMember>();
+
+			if (fractionComponent != null && fractionComponent.Id != 0) // не наш юнит
+			{
+				var attackableComponent = (selectableItem as Component).GetComponent<IAttackable>();
+				
+				_enemy.SetValue(attackableComponent);
+			}
 		}
 
 		_patrolPoints.Value.Clear();

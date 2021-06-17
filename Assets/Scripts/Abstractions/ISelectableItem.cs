@@ -2,11 +2,9 @@ using UnityEngine;
 
 namespace Abstractions
 {
-	public interface ISelectableItem
+	public interface ISelectableItem : IHealthHolder
 	{
 		Sprite Icon { get; }
-		float Health { get; }
-		float MaxHp { get; }
 
 		void Select(bool isSelected);
 	}

@@ -2,7 +2,8 @@
 
 public class ButtonPanel
 {
-	[Inject] private CommandCreatorBase<IProductionCommand> _produceCommandCreator;
+	[Inject] private CommandCreatorBase<IProductionCommandEllen> _produceEllenCommandCreator;
+	[Inject] private CommandCreatorBase<IProductionCommandChomper> _produceChomperCommandCreator;
 	[Inject] private CommandCreatorBase<IMoveCommand> _moveCommandCreator;
 	[Inject] private CommandCreatorBase<IAttackCommand> _attackCommandCreator;
 	[Inject] private CommandCreatorBase<IPatrolCommand> _patrolCommandCreator;
@@ -15,7 +16,8 @@ public class ButtonPanel
 	{
 		_isPending = true;
 
-		_produceCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
+		_produceEllenCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
+		_produceChomperCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
 		_moveCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
 		_attackCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
 		_patrolCommandCreator.CreateCommand(executor, command => ExecuteSpecificCommand(executor, command));
@@ -33,7 +35,8 @@ public class ButtonPanel
 		if (!_isPending)
 			return;
 
-		_produceCommandCreator.CancelCommand();
+		_produceEllenCommandCreator.CancelCommand();
+		_produceChomperCommandCreator.CancelCommand();
 		_moveCommandCreator.CancelCommand();
 	}
 

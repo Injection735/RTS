@@ -1,24 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using Abstractions;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace Core
 {
-	public class ProduceCommand : IProductionCommand
+	public class ProduceEllenCommand : IProductionCommandEllen
 	{
 		[InjectAsset("Ellen")] private GameObject _unitPrefab;
 		public GameObject UnitPrefab => _unitPrefab;
-		[Inject] public int ProductionTime { get; }
-		[Inject] public Sprite ProductionIcon { get; }
+		[Inject(Id = "Ellen")] public int ProductionTime { get; }
+		[Inject(Id = "Ellen")] public Sprite ProductionIcon { get; }
+	}
+
+	public class ProduceChomperCommand : IProductionCommandChomper
+	{
+		[InjectAsset("Chomper")] private GameObject _unitPrefab;
+		public GameObject UnitPrefab => _unitPrefab;
+		[Inject(Id = "Chomper")] public int ProductionTime { get; }
+		[Inject(Id = "Chomper")] public Sprite ProductionIcon { get; }
 	}
 
 	public class AttackCommand : IAttackCommand
 	{
-		public GameObject AttackedObject { get; }
+		public IAttackable Target { get; }
 
-		public AttackCommand(GameObject attackedObject)
+		public AttackCommand(IAttackable target)
 		{
-			AttackedObject = attackedObject;
+			Target = target;
 		}
 	}
 

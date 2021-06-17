@@ -58,13 +58,23 @@ public abstract class CommandCreatorCancelable<T, TParam> : CommandCreatorBase<T
 	}
 }
 
-public class ProduceUnitCommandCreator : CommandCreatorBase<IProductionCommand>
+public class ProduceEllenCommandCreator : CommandCreatorBase<IProductionCommandEllen>
 {
 	[Inject] private AssetStorage _context;
 
-	protected override void CreateSpecificCommand(Action<IProductionCommand> onCreate)
+	protected override void CreateSpecificCommand(Action<IProductionCommandEllen> onCreate)
 	{
-		onCreate.Invoke(_context.Inject(new ProduceCommand()));
+		onCreate.Invoke(_context.Inject(new ProduceEllenCommand()));
+	}
+}
+
+public class ProduceChomperCommandCreator : CommandCreatorBase<IProductionCommandChomper>
+{
+	[Inject] private AssetStorage _context;
+
+	protected override void CreateSpecificCommand(Action<IProductionCommandChomper> onCreate)
+	{
+		onCreate.Invoke(_context.Inject(new ProduceChomperCommand()));
 	}
 }
 
@@ -94,10 +104,10 @@ public class AttackCommandCreator : CommandCreatorBase<IAttackCommand>
 
 	private Action<IAttackCommand> _onCreate;
 
-	private GameObjectValue _enemy;
+	private AttackableValue _enemy;
 
 	[Inject]
-	private void Init(GameObjectValue enemy)
+	private void Init(AttackableValue enemy)
 	{
 		_enemy = enemy;
 		_enemy.OnChanged += HandleAttack;

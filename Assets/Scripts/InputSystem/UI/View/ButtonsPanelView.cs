@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public enum CommandExecutorType
 {
-	Produce,
+	ProduceEllen,
+	ProduceChomper,
 	Attack,
 	Move,
 	Patrol,
@@ -19,7 +20,8 @@ public class ButtonsPanelView : MonoBehaviour
 {
 	[SerializeField] private Button _moveButton;
 	[SerializeField] private Button _attackButton;
-	[SerializeField] private Button _produceUnitButton;
+	[SerializeField] private Button _produceEllenUnitButton;
+	[SerializeField] private Button _produceChomperUnitButton;
 	[SerializeField] private Button _patrolButton;
 	[SerializeField] private Button _stopButton;
 	[SerializeField] private Button _setCollectionPointButton;
@@ -32,8 +34,10 @@ public class ButtonsPanelView : MonoBehaviour
 	{
 		switch (type)
 		{
-			case CommandExecutorType.Produce:
-				return typeof(CommandExecutorBase<IProductionCommand>);
+			case CommandExecutorType.ProduceEllen:
+				return typeof(CommandExecutorBase<IProductionCommandEllen>);
+			case CommandExecutorType.ProduceChomper:
+				return typeof(CommandExecutorBase<IProductionCommandChomper>);
 			case CommandExecutorType.Attack:
 				return typeof(CommandExecutorBase<IAttackCommand>);
 			case CommandExecutorType.Move:
@@ -53,7 +57,8 @@ public class ButtonsPanelView : MonoBehaviour
 	{
 		_buttons = new Dictionary<CommandExecutorType, Button>()
 		{
-			{ CommandExecutorType.Produce, _produceUnitButton },
+			{ CommandExecutorType.ProduceEllen, _produceEllenUnitButton },
+			{ CommandExecutorType.ProduceChomper, _produceChomperUnitButton },
 			{ CommandExecutorType.Attack, _attackButton },
 			{ CommandExecutorType.Move, _moveButton },
 			{ CommandExecutorType.Patrol, _patrolButton },

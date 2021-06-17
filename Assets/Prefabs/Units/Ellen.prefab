@@ -3515,6 +3515,9 @@ GameObject:
   - component: {fileID: 7996215754842715091}
   - component: {fileID: 1394251981391974621}
   - component: {fileID: 6124843301764016662}
+  - component: {fileID: 3463464762158787414}
+  - component: {fileID: 4132555177588726340}
+  - component: {fileID: -6206301751645055764}
   m_Layer: 0
   m_Name: Ellen
   m_TagString: Untagged
@@ -3614,7 +3617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c9644c4288c5e418c650dbadffa6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  _icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 3}
   _health: 100
   _maxHp: 100
 --- !u!114 &7996215754842715101
@@ -3642,6 +3645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0dc474b1d557cf42a351eba59638fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agent: {fileID: 1394251981391974621}
 --- !u!114 &7996215754842715091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3689,3 +3693,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveExecutor: {fileID: 7996215754842715101}
+--- !u!114 &3463464762158787414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184642326590217051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1289a8bd7cb6024f83f64268a943568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
+--- !u!114 &4132555177588726340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184642326590217051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: -6206301751645055764}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &-6206301751645055764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184642326590217051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afec8385318a12849a7d853fbc91dc6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
