@@ -10,5 +10,7 @@ public class CoreInstaller : MonoInstaller
 		Container.BindInterfacesAndSelfTo<ProduceUnitExecutorEllen>().FromComponentInHierarchy().AsTransient();
 		Container.BindInterfacesAndSelfTo<ProduceUnitExecutorChomper>().FromComponentInHierarchy().AsTransient();
 		Container.BindInterfacesAndSelfTo<AttackUnitExecutor>().FromComponentInHierarchy().AsTransient();
+
+		Container.Bind<BuildingsData>().AsSingle();
 	}
 }
