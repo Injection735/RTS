@@ -7,6 +7,8 @@ using Zenject;
 
 public abstract class ProduceUnitExecutorBase<T> : CommandExecutorBase<T>, ITickable, IUnitProducer where T : IProductionCommand
 {
+	[Inject] private BalancesData balancesData;
+
 	public System.Action<GameObject> OnUnitCreate = delegate { };
 
 	public IReactiveCollection<IUnitProductionTask> Queue => _queue;
@@ -20,7 +22,12 @@ public abstract class ProduceUnitExecutorBase<T> : CommandExecutorBase<T>, ITick
 			return Task.CompletedTask;
 		}
 
-		_queue.Add(new UnitProductionTask(command.ProductionIcon, command.ProductionTime, command.UnitPrefab));
+		if (balancesData.Coins.Value < command.Cost)
+			return Task.CompletedTask;
+
+
+		_queue.Add(new UnitProductionTask(command.ProductionIcon, command.ProductionTime, command.UnitPrefab, command.Cost));
+		balancesData.Coins.Value -= command.Cost;
 		return Task.CompletedTask;
 	}
 

@@ -52,9 +52,7 @@ public class UnitProductionPanelView : MonoBehaviour
 		_productionProgress.value = 0;
 
 		foreach(var image in _images)
-		{
 			image.sprite = _emptyIcon;
-		}
 	}
 
 	private void UpdateTimeProgress(float timeLeft, float productionTime)

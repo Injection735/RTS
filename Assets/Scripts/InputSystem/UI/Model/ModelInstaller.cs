@@ -31,13 +31,7 @@ public class ModelInstaller : MonoInstaller
 		Container.Bind<AttackableValue>().FromInstance(_enemyValue).AsSingle();
 	
 		Container.Bind<ButtonPanel>().AsTransient();
+		Container.Bind<ImmediateCommands>().AsTransient();
 		Container.Bind<UnitProductionPanel>().AsTransient();
-
-		SetUnitInfo();
-	}
-
-	private void SetUnitInfo()
-	{
-
 	}
 }

@@ -1,10 +1,7 @@
-﻿
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 
 public class MoveUnitExecutor : CommandExecutorBase<IMoveCommand>
 {

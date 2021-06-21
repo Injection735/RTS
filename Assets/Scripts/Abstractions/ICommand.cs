@@ -10,8 +10,9 @@ public interface ICommand
 public interface IProductionCommand : ICommand
 {
 	GameObject UnitPrefab { get; }
-	int ProductionTime { get; }
+	float ProductionTime { get; }
 	Sprite ProductionIcon { get; }
+	int Cost { get; }
 }
 
 public interface IProductionCommandEllen : IProductionCommand

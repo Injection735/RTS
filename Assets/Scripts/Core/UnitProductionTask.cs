@@ -10,13 +10,15 @@ namespace Core
 		public ReactiveProperty<float> ProductionTimeLeft { get; set; }
 		public float ProductionTime { get; }
 		public GameObject UnitPrefab { get; }
+		public int Cost { get; }
 
-		public UnitProductionTask(Sprite icon, float productionTime, GameObject unitPrefab)
+		public UnitProductionTask(Sprite icon, float productionTime, GameObject unitPrefab, int cost)
 		{
 			Icon = icon;
 			ProductionTimeLeft = new ReactiveProperty<float>(productionTime);
 			ProductionTime = productionTime;
 			UnitPrefab = unitPrefab;
+			Cost = cost;
 		}
 	}
 }

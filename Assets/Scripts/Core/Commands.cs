@@ -9,16 +9,18 @@ namespace Core
 	{
 		[InjectAsset("Ellen")] private GameObject _unitPrefab;
 		public GameObject UnitPrefab => _unitPrefab;
-		[Inject(Id = "Ellen")] public int ProductionTime { get; }
+		[Inject(Id = "Ellen")] public float ProductionTime { get; } = 10;
 		[Inject(Id = "Ellen")] public Sprite ProductionIcon { get; }
+		[Inject(Id = "Ellen")] public int Cost { get; } = 10;
 	}
 
 	public class ProduceChomperCommand : IProductionCommandChomper
 	{
 		[InjectAsset("Chomper")] private GameObject _unitPrefab;
 		public GameObject UnitPrefab => _unitPrefab;
-		[Inject(Id = "Chomper")] public int ProductionTime { get; }
+		[Inject(Id = "Chomper")] public float ProductionTime { get; } = 10;
 		[Inject(Id = "Chomper")] public Sprite ProductionIcon { get; }
+		[Inject(Id = "Chomper")] public int Cost { get; } = 10;
 	}
 
 	public class AttackCommand : IAttackCommand

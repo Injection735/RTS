@@ -12,5 +12,6 @@ public class CoreInstaller : MonoInstaller
 		Container.BindInterfacesAndSelfTo<AttackUnitExecutor>().FromComponentInHierarchy().AsTransient();
 
 		Container.Bind<BuildingsData>().AsSingle();
+		Container.Bind<BalancesData>().AsSingle();
 	}
 }
