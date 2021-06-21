@@ -4,7 +4,7 @@ using System.Threading;
 using UnityEngine;
 using Zenject;
 
-public partial class AttackUnitExecutor : CommandExecutorBase<IAttackCommand>, ITickable
+public partial class AttackUnitExecutor : CommandExecutorBase<IAttackCommand>
 {
 	public class AttackOperation : IAwaitable<AsyncExtensions.Void>
 	{

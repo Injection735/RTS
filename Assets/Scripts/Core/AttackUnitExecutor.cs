@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public partial class AttackUnitExecutor : CommandExecutorBase<IAttackCommand>, ITickable
+public partial class AttackUnitExecutor : CommandExecutorBase<IAttackCommand>
 {
 	[SerializeField] private NavMeshAgent _agent;
 	[Inject(Id = "Distance")] private float _attackDistance = 1.0f;
@@ -24,7 +24,7 @@ public partial class AttackUnitExecutor : CommandExecutorBase<IAttackCommand>, I
 	private Subject<Vector3> _destination = new Subject<Vector3>();
 	private Subject<IAttackable> _attackTarget = new Subject<IAttackable>();
 
-	public void Tick()
+	protected void Update()
 	{
 		if (_target == null || _currentAttackOperation == null)
 			return;
@@ -60,14 +60,18 @@ public partial class AttackUnitExecutor : CommandExecutorBase<IAttackCommand>, I
 
 	protected void MoveTo(Vector3 to)
 	{
-		_agent.SetDestination(to);
+		if (gameObject.activeSelf && _agent != null)
+			_agent.SetDestination(to);
 	}
 
 	protected void AttackTarget(IAttackable target)
 	{
+		if (_agent.isActiveAndEnabled)
+			_agent.ResetPath();
+
 		target.ReceiveDamage(_attackDamage);
 
-		if (target.Health <= 0)
+		if (_currentAttackOperation != null && target.Health <= 0)
 		{
 			_currentAttackOperation.Cancel();
 			_currentAttackOperation = null;

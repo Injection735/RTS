@@ -26,7 +26,7 @@ namespace Core
 			_selector.SetSelected(isSelected);
 		}
 
-		private void Awake()
+		private void Start()
 		{
 			_fractionComponent = GetComponent<IFractionMember>();
 			if (_fractionComponent == null)
